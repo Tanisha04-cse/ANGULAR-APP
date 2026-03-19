@@ -1,0 +1,31 @@
+<table *ngIf="data.length > 0; else noData">
+
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col }}
+      </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let row of data">
+
+      <td *ngFor="let col of columns">
+        {{ row[col] }}
+      </td>
+
+      <td>
+        <button (click)="onEdit(row)">Edit</button>
+        <button (click)="onDelete(row.id)">Delete</button>
+      </td>
+
+    </tr>
+  </tbody>
+
+</table>
+
+<ng-template #noData>
+  <p>No Data Available</p>
+</ng-template>

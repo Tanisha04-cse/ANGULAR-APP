@@ -1,0 +1,75 @@
+
+
+<div class="container">
+
+  <!-- Title -->
+  <h2 class="title">
+    {{ isEditMode ? 'Edit Student' : 'Add Student' }}
+  </h2>
+
+  <!-- Form -->
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="form">
+
+    <!-- Name -->
+    <div class="form-group">
+      <input 
+        formControlName="name" 
+        placeholder="Enter Name"
+        class="input"
+      >
+      <small *ngIf="studentForm.get('name')?.touched && studentForm.get('name')?.invalid">
+        Name is required
+      </small>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <input 
+        formControlName="email" 
+        placeholder="Enter Email"
+        class="input"
+      >
+      <small *ngIf="studentForm.get('email')?.touched && studentForm.get('email')?.invalid">
+        Valid email required
+      </small>
+    </div>
+
+    <!-- Course -->
+    <div class="form-group">
+      <input 
+        formControlName="course" 
+        placeholder="Enter Course"
+        class="input"
+      >
+      <small *ngIf="studentForm.get('course')?.touched && studentForm.get('course')?.invalid">
+        Course is required
+      </small>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-group">
+      <button type="submit" class="btn primary">
+        {{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+
+      <button 
+        type="button" 
+        class="btn secondary"
+        (click)="studentForm.reset(); isEditMode=false"
+        *ngIf="isEditMode"
+      >
+        Cancel
+      </button>
+    </div>
+
+  </form>
+
+
+  <app-table
+    [data]="students"
+    [columns]="['name', 'email', 'course']"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)">
+  </app-table>
+
+</div>

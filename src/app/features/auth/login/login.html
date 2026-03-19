@@ -1,0 +1,62 @@
+<div class="auth-container">
+
+  <div class="auth-card">
+
+    <h2 class="title">Login</h2>
+
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form">
+
+      <!-- Email -->
+      <div class="form-group">
+        <input 
+          type="email"
+          name="email"
+          ngModel
+          placeholder="Enter Email"
+          required
+          email
+          #email="ngModel"
+          class="input"
+        />
+        <small *ngIf="email.invalid && email.touched">
+          Enter valid email
+        </small>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <input 
+          type="password"
+          name="password"
+          ngModel
+          placeholder="Enter Password"
+          required
+          minlength="6"
+          #password="ngModel"
+          class="input"
+        />
+        <small *ngIf="password.invalid && password.touched">
+          Minimum 6 characters required
+        </small>
+      </div>
+
+      <!-- Button -->
+      <button 
+        type="submit" 
+        [disabled]="loginForm.invalid"
+        class="btn primary"
+      >
+        Login
+      </button>
+
+    </form>
+
+    <!-- Signup Redirect -->
+    <p class="redirect">
+      Don’t have an account?
+      <a routerLink="/signup">Signup</a>
+    </p>
+
+  </div>
+
+</div>
